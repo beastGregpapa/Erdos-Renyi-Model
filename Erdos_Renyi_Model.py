@@ -55,27 +55,27 @@ def quick_gnp_random_graph(n, p, seed=None):
 
 
 # accepting input from the user
-nodes = int(input("please input the number of the nodes   "))
-probability = float(input("please input the number of the probability   "))
+nodes = int(input("input the number of the nodes "))
+probability = float(input("input the number of the probability "))
 
-# drawing the graph of Erdős Renyi
+# drawing the graph of Erdős-Renyi
 Erdős = quick_gnp_random_graph(nodes, probability)
 # Reading input data from oregon2_010407.txt file
 internet_graph = nx.read_edgelist("oregon2_010407.txt")
 
 # print(type(G))
 # G.number_of_edges()
-# print("number of edges of internet_graph is:   "internet_graph.number_of_edges())
+# print("number of edges of internet_graph is: "internet_graph.number_of_edges())
 # G.number_of_nodes()
-# print("number of nodes of internet_graph is:  "internet_graph.number_of_nodes())
+# print("number of nodes of internet_graph is: "internet_graph.number_of_nodes())
 
 # showing number of nodes, edges and average degree of internet graph
-print("internet_Graph info: ", nx.info(internet_graph))
+print("Internet Graph info: ", nx.info(internet_graph))
 print("Erdos Graph info: ", nx.info(Erdős))
 
 # checking if the graph is directed or undirected
-print("is internet graph directed?", (nx.is_directed(internet_graph)))
-print("is erdős graph directed?", (nx.is_directed(Erdős)))
+print("is Internet graph directed?", (nx.is_directed(internet_graph)))
+print("is Erdős graph directed?", (nx.is_directed(Erdős)))
 
 # diameter(G, e=None)
 # degree_centrality(G)
@@ -84,29 +84,38 @@ print("is erdős graph directed?", (nx.is_directed(Erdős)))
 # print(average_clustering(internet_graph),(average_clustering(Erdős)))
 
 # compute average clustering for the graphs
-print("Average clustering of Internet_graph is: ", average_clustering(internet_graph),
+print("Average clustering of Internet graph is: ", average_clustering(internet_graph),
       "\nAverage clustering of Erdos graph is:  ", average_clustering(Erdős))
 
-print("Transitivity of internet is: ", nx.transitivity(internet_graph), "\nTransitivity of Erdos is: ",
+print("Transitivity of Internet graph is: ", nx.transitivity(internet_graph), "\nTransitivity of Erdos graph is: ",
       nx.transitivity(Erdős))
 
 # compute clustering of the graphs
-print("clustering of Internet_graph is ", clustering(internet_graph), "clustering of Erdos graph is  ", clustering(Erdős))
+print("clustering of Internet graph is ", clustering(internet_graph), "clustering of Erdos graph is  ", clustering(Erdős))
 
 # compute Degree_centrality for nodes
-print("Degree_centrality of Internet_graph is : ", degree_centrality(internet_graph), "\nDegree_centrality of Erdos graph is:  ", degree_centrality(Erdős))
+print("Degree_centrality of Internet graph is: ", degree_centrality(internet_graph), "\nDegree_centrality of Erdos graph is: ", degree_centrality(Erdős))
 
 
 # compute Diameter of the Graphs
-print("Diameter of Erdos graph is:  ", diameter(Erdős), "\nDiameter of Internet Graph is : ", diameter(internet_graph))
-# print ("diameter of erdos is ",nx.diameter(Erdős))
+print("Diameter of Erdos graph is: ", diameter(Erdős), "\nDiameter of Internet Graph is: ", diameter(internet_graph))
+# print ("diameter of Erdos is ",nx.diameter(Erdős))
 
 # Drawing Erdős graph according to the users input
 nx.draw(Erdős, with_labels=True)
 plt.show()
 
-# Drawing Internet_graph with 10981 nodes and 30855 edges
+# Drawing Internet graph with 10981 nodes and 30855 edges
 nx.draw(internet_graph, with_labels=True)
+plt.show()
+
+# Comparing results with inbuilt Page Rank method
+p = nx.pagerank(G)
+p_sorted = sorted(p.items(), key=lambda:x[1], reverse=True)
+for v in p_sorted:
+    print(v[0])
+
+nx.draw(G, with_labels=True)
 plt.show()
 
 
